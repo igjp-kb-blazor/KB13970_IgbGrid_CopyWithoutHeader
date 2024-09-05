@@ -1,0 +1,40 @@
+﻿<div style="max-width: 900px; margin: auto; padding: 24px; display: flex; flex-direction: column; gap: 24px;">
+    <IgbGrid Data="_people"
+             PrimaryKey="@nameof(Person.Id)"
+             AutoGenerate="false"
+             ClipboardOptions="_clipboardOptions">
+        <IgbColumn Field="@nameof(Person.Name)" Header="氏名"></IgbColumn>
+        <IgbColumn Field="@nameof(Person.Age)" Header="年齢" DataType="GridColumnDataType.Number"></IgbColumn>
+        <IgbColumn Field="@nameof(Person.JobTitle)" Header="職種"></IgbColumn>
+    </IgbGrid>
+</div>
+
+@code
+{
+#pragma warning disable BL0005
+    private IgbClipboardOptions _clipboardOptions = new()
+        {
+            CopyHeaders = false,
+            CopyFormatters = true,
+            Enabled = true,
+            Separator = "\t"
+        };
+#pragma warning restore BL0005
+
+    public class Person
+    {
+        public int Id { get; set; }
+        public string? Name { get; set; }
+        public int Age { get; set; }
+        public string? JobTitle { get; set; }
+    }
+
+    private List<Person> _people = new()
+    {
+        new() { Id = 1, Name = "ボブ", Age = 30, JobTitle = "開発者" },
+        new() { Id = 2, Name = "アリス", Age = 25, JobTitle = "サポート" },
+        new() { Id = 3, Name = "ジョン", Age = 40, JobTitle = "マネージャー" },
+        new() { Id = 4, Name = "エミリー", Age = 35, JobTitle = "マーケティング" },
+        new() { Id = 5, Name = "デイビッド", Age = 28, JobTitle = "営業" }
+    };
+}
